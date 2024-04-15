@@ -1,5 +1,9 @@
 # Ex.No:1a  			Study of Socket Programming
 
+## NAME : A.LAHARI
+
+## REG NO : 212223230111
+
 ## Aim: 
 To perform a study on Socket Programming
 ## Introduction:
@@ -56,20 +60,18 @@ Socket programming finds applications in various domains, including web developm
 ### Client:
 ```
 import socket
+from datetime import datetime
 s=socket.socket()
 s.bind(('localhost',8000))
 s.listen(5)
 c,addr=s.accept()
-while True:
-   i=input("Enter a data: ")
-   c.send(i.encode())
-   ack=c.recv(1024).decode()
-   if ack:
-      print(ack)
-      continue
-   else:
-      c.close()
-      break
+print("Client Address : ",addr)
+now = datetime.now()
+c.send(now.strftime("Date: %d/%m/%Y and Time: %H:%M:%S").encode())
+ack=c.recv(1024).decode()
+if ack:
+ print(ack)
+c.close()
 
 ```
 ### Server:
@@ -77,19 +79,20 @@ while True:
 import socket
 s=socket.socket()
 s.connect(('localhost',8000))
-while True:
-    print(s.recv(1024).decode())
-    s.send("Acknowledgement Received".encode())
+print(s.getsockname())
+print(s.recv(1024).decode())
+s.send("acknowledgement recived from the server".encode())
 
 ```
 ## Output:
+
 ### Client:
 
-![Screenshot 2024-04-10 111908](https://github.com/AnnaLahari/SocketStudy/assets/149365425/b50f59b2-3304-4026-b96c-4ed8042b20df)
+![Screenshot 2024-04-15 134757](https://github.com/AnnaLahari/SocketStudy/assets/149365425/f13f4b99-43ae-4d9f-a395-1d279978dd3c)
 
 ### Server:
 
-![Screenshot 2024-04-10 112043](https://github.com/AnnaLahari/SocketStudy/assets/149365425/2e2c4a6d-c720-4666-ab99-abe3c1b66199)
+![Screenshot 2024-04-15 134816](https://github.com/AnnaLahari/SocketStudy/assets/149365425/f3797442-0592-4750-997b-042742af32fe)
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
